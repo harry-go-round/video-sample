@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, SkipSelf, ViewContainerRef, AfterViewInit, Renderer } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, SkipSelf, ViewContainerRef, AfterViewInit, Renderer } from '@angular/core';
+import 'hammerjs';
 
 @Component({
   selector: 'app-video-controller',
@@ -68,12 +68,8 @@ export class VideoControllerComponent implements OnInit, AfterViewInit {
     this.video.currentTime = time
   }
   timeUpdate() {
-    if(this.video) {
-    console.log('timeupdate')
     const value = (100 / this.video.duration) * this.video.currentTime
     this.time = value
-    
-  }
   }
   volumeChange() {
     this.video.volume = this.volume

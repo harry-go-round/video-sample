@@ -1,5 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
