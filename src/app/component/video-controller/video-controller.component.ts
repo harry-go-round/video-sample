@@ -13,12 +13,16 @@ export class VideoControllerComponent implements OnInit, AfterViewInit {
   time: number
   volume:number
   loadFlg: boolean
+  document: any = document;
+  parent: any;
 
   constructor(
     @SkipSelf() vcr: ViewContainerRef,
-    private renderer: Renderer
+    private renderer: Renderer,
+    private fullScreenUnit: HTMLElement
   ) {
     this.video = vcr.element.nativeElement
+    this.parent = this.fullScreenUnit
     this.renderer.listen(this.video, 'loadedmetadata', () => this.loadFlg = true)
   }
 
@@ -54,13 +58,43 @@ export class VideoControllerComponent implements OnInit, AfterViewInit {
     }
     // this.video.muted = this.video.muted ? false : true
   }
+
+  isFullScreen() {
+    return this.document.fullscreenElement
+      || this.document.mozFullscreenElement
+      || this.document.msFullscreenElement
+      || this.document.webkitFullscreenElement
+  }
+
   fullscreen() {
-    if(this.video.requestFullscreen) {
-      this.video.requestFullscreen()
-    }else if(this.video.mozRequestFullscreen) {
-      this.video.mozRequestFullscreen()
-    }else if(this.video.webkitRequestFullscreen) {
-      this.video.webkitRequestFullscreen()
+    if (this.isFullScreen()) {
+      this.exitFullscreen()
+    } else {
+      this.requestFullscreen()
+    }
+  }
+
+  requestFullscreen() {
+    if(this.parent.requestFullscreen) {
+      this.parent.requestFullscreen()
+    }else if(this.parent.mozRequestFullscreen) {
+      this.parent.mozRequestFullscreen()
+    }else if(this.parent.webkitRequestFullscreen) {
+      this.parent.webkitRequestFullscreen()
+    }
+  }
+
+  exitFullscreen() {
+    if (this.document.webkitCancelFullScreen) {
+     this. document.webkitCancelFullScreen();
+    } else if (this.document.mozCancelFullScreen) {
+      this.document.mozCancelFullScreen();
+    } else if (this.document.msExitFullscreen) {
+      this.document.msExitFullscreen();
+    } else if(this.document.cancelFullScreen) {
+      this.document.cancelFullScreen();
+    } else if(this.document.exitFullscreen) {
+      this.document.exitFullscreen();
     }
   }
   seekbarChange() {
