@@ -1,0 +1,18 @@
+<div class="video-controls">
+    <button mat-icon-button (click)="playPause()">
+        <mat-icon *ngIf="playFlg">pause</mat-icon>
+        <mat-icon *ngIf="!playFlg">play_arrow</mat-icon>
+    </button>
+    <span *ngIf="loadFlg">{{ retMinuteSeconds(video.currentTime) }} / {{ retMinuteSeconds(video.duration) }}</span>
+    <button mat-icon-button (click)="muted()">
+        <mat-icon *ngIf="!video.muted && volume != 0">volume_up</mat-icon>
+        <mat-icon *ngIf="video.muted || volume == 0">volume_off</mat-icon>
+    </button>
+        <mat-slider [(value)]="volume" min="0" max="1" step="0.1" (change)="volumeChange()"></mat-slider>
+    <button mat-icon-button (click)="fullscreen()">
+        <mat-icon>fullscreen</mat-icon>
+    </button>
+    <div>
+        <mat-slider class="time-bar" [(value)]="time" (change)="seekbarChange()" (mousedown)="pause()" (mouseup)="play()"></mat-slider>
+    </div>
+</div>

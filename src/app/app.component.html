@@ -1,15 +1,3 @@
-<video src="../assets/travelpocketsicelandlandoffireandicemp4.mp4" poster="../assets/travelpocketsicelandlandoffireandicemp4.jpg" #video controls (timeupdate)="timeUpdate()"></video>
-<div>
-    <button (click)="playPause()">
-        <span *ngIf="playFlg">pause</span>
-        <span *ngIf="!playFlg">play</span>
-    </button>
-    <button (click)="muted()">
-        <span>muted</span>
-    </button>
-    <button (click)="fullscreen()">
-        <span>fullscreen</span>
-    </button>
-    seek-bar<input type="range" value="0" #seekbar (change)="seekbarChange()" (mousedown)="pause()" (mouseup)="play()">
-    volume-bar<input type="range" value="1" min="0" max="1" step="0.1" #volumebar (change)="volumeChange()">
+<div class="relative">
+    <video appController src="../assets/travelpocketsicelandlandoffireandicemp4.mp4" poster="../assets/travelpocketsicelandlandoffireandicemp4.jpg"></video>
 </div>
