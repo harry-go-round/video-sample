@@ -10,7 +10,6 @@ export class ControllerDirective implements OnInit  {
   factory: ComponentFactory<VideoControllerComponent>
   controller: ComponentRef<VideoControllerComponent>
   
-  @Input() public fullScreenUnit: HTMLElement;
   constructor(
     private resolver: ComponentFactoryResolver,
     private vcr: ViewContainerRef,
@@ -19,7 +18,6 @@ export class ControllerDirective implements OnInit  {
 
   ngOnInit() {
     console.log(this.vcr.element)
-    console.log(this.fullScreenUnit)
     this.factory = this.resolver.resolveComponentFactory(VideoControllerComponent)
     this.controller = this.vcr.createComponent(this.factory, undefined, this.createInjector(this.vcr))
   }
@@ -27,8 +25,8 @@ export class ControllerDirective implements OnInit  {
   createInjector(viewContainerRef) {
     return Injector.create({
       providers: [
-        { provide: ViewContainerRef, useValue: viewContainerRef },
-        { provide: HTMLElement, useValue: this.fullScreenUnit}],
+        { provide: ViewContainerRef, useValue: viewContainerRef }
+      ],
       parent: this.injector
     })
   }

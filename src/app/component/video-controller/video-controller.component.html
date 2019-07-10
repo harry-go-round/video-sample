@@ -1,7 +1,15 @@
-<div class="video-controls">
+<div class="controls-area" (pointerenter)="dispControls($event)" (pointerleave)="hideControls($event)" [style.width]="controlWidth">
+<div *ngIf="displayFlg" class="video-controls">
+<!-- <div class="video-controls"> -->
+    <button mat-icon-button (click)="backward()">
+        <mat-icon>replay_10</mat-icon>
+    </button>
     <button mat-icon-button (click)="playPause()">
         <mat-icon *ngIf="playFlg">pause</mat-icon>
         <mat-icon *ngIf="!playFlg">play_arrow</mat-icon>
+    </button>
+    <button mat-icon-button (click)="forward()">
+        <mat-icon>forward_10</mat-icon>
     </button>
     <span *ngIf="loadFlg">{{ retMinuteSeconds(video.currentTime) }} / {{ retMinuteSeconds(video.duration) }}</span>
     <button mat-icon-button (click)="muted()">
@@ -10,9 +18,11 @@
     </button>
         <mat-slider [(value)]="volume" min="0" max="1" step="0.1" (change)="volumeChange()"></mat-slider>
     <button mat-icon-button (click)="fullscreen()">
-        <mat-icon>fullscreen</mat-icon>
+        <mat-icon *ngIf="!fullscreenFlg">fullscreen</mat-icon>
+        <mat-icon *ngIf="fullscreenFlg">fullscreen_exit</mat-icon>
     </button>
-    <div>
+    <div class="progress">
         <mat-slider class="time-bar" [(value)]="time" (change)="seekbarChange()" (mousedown)="pause()" (mouseup)="play()"></mat-slider>
     </div>
+</div>
 </div>
